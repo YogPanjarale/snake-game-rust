@@ -27,10 +27,10 @@ pub struct Game {
 
 impl Game {
     fn render(&mut self, args: &RenderArgs) {
-        const GREEN: [f32; 4] = [0.0, 1.0, 0.0, 1.0];
+        const BACKGROUND: [f32; 4] = [0.125, 0.125, 0.125, 1.0];
 
         self.gl.draw(args.viewport(), |_c, gl| {
-            graphics::clear(GREEN, gl);
+            graphics::clear(BACKGROUND, gl);
         });
 
         self.snake.render(args);
@@ -99,7 +99,7 @@ pub struct SnakePiece(u32, u32);
 
 impl Snake {
     pub fn render(&mut self, args: &RenderArgs) {
-        const RED: [f32; 4] = [1.0, 0.0, 0.0, 1.0];
+        const RED: [f32; 4] = [0.98, 0.29, 0.078, 1.0];
 
         let squares: Vec<graphics::types::Rectangle> = self
             .snake_parts
@@ -172,7 +172,7 @@ impl Food {
     }
 
     fn render(&mut self, gl: &mut GlGraphics, args: &RenderArgs, width: u32) {
-        const BLACK: [f32; 4] = [1.0, 1.0, 1.0, 1.0];
+        const FOOD_COLOR: [f32; 4] = [0.29, 1.0, 0.36, 1.0];
 
         let x = self.x * width;
         let y = self.y * width;
@@ -182,7 +182,7 @@ impl Food {
         gl.draw(args.viewport(), |c, gl| {
             let transform = c.transform;
 
-            graphics::rectangle(BLACK, square, transform, gl)
+            graphics::rectangle(FOOD_COLOR, square, transform, gl)
         });
     }
 }
